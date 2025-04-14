@@ -1,5 +1,6 @@
 package com.appteste.avaliacao1
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -84,6 +85,8 @@ class GameActivity : AppCompatActivity() {
         question.userAnswer = answer
         question.isAnswered = true
 
+        println("Resposta fornecida: $answer")
+        println("Resposta correta: ${question.correctAnswer}")
         if (answer == question.correctAnswer) {
             question.isCorrect = true
             responseText.text = "Resposta correta!"
@@ -127,13 +130,16 @@ class GameActivity : AppCompatActivity() {
 
     private fun finishGame() {
         Toast.makeText(this, "Jogo finalizado! Pontuação: $score", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, FinalScreenActivity::class.java)
+
+        intent.putExtra("score", score)
+        startActivity(intent);
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_game)
 
-        // Inicialize as Views corretamente
         responseText = findViewById(R.id.responseText)
         questionText = findViewById(R.id.questionText)
         answerInput = findViewById(R.id.answerInput)
@@ -141,14 +147,12 @@ class GameActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.nextButton)
         mainContainer = findViewById(R.id.main)
 
-        // Ajuste de insets para bordas
         ViewCompat.setOnApplyWindowInsetsListener(mainContainer) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Carregar as perguntas
         loadQuestions()
     }
 }
