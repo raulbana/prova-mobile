@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startGame(view: View){
-        val intent = Intent(this, FinalScreen::class.java)
+        val intent = Intent(this, GameActivity::class.java)
         startActivity(intent);
 
     }
