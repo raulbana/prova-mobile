@@ -106,6 +106,7 @@ class GameActivity : AppCompatActivity() {
         nextButton.visibility = View.INVISIBLE
         mainContainer.setBackgroundColor(Color.parseColor("#FFFFFF"))
         responseText.text = ""
+        answerInput.text.clear()
 
         if (currentIndex + 1 < questions.size) {
             currentIndex++
